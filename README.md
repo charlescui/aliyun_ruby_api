@@ -1,8 +1,15 @@
-# Aliyun ECS and CDN API Client for Ruby
+# Aliyun API Client for Ruby
 
 
-The Aliyun ECS and CDN API Client for Ruby 是调用 [阿里云 ECS服务](http://aliyunecs.oss.aliyuncs.com/ECS-API-Reference%202014-05-26.pdf?spm=5176.7150518.1996836753.5.9U0YcN&file=ECS-API-Reference%202014-05-26.pdf) 和 [阿里云 CDN服务](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf?spm=5176.7150518.1996836753.5.OT7PX3&file=oss%20api%2020140828.pdf) 的 [Ruby]客户端类库.
+The Aliyun 开放平台 API Client for Ruby 是调用 [阿里云 ECS服务](http://aliyunecs.oss.aliyuncs.com/ECS-API-Reference%202014-05-26.pdf?spm=5176.7150518.1996836753.5.9U0YcN&file=ECS-API-Reference%202014-05-26.pdf) 和 [阿里云 CDN服务](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf?spm=5176.7150518.1996836753.5.OT7PX3&file=oss%20api%2020140828.pdf) 的 [Ruby]客户端类库.
 
+## 目前支持
+
+- cdn
+- ecs
+- ess
+- rds
+- slb
 
 ## 安装
 
