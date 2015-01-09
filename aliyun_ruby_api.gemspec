@@ -6,11 +6,11 @@ require 'aliyun_ruby_api/version'
 Gem::Specification.new do |spec|
   spec.name          = "aliyun_ruby_api"
   spec.version       = AliyunRubyApi::VERSION
-  spec.authors       = ["cheyang"]
-  spec.email         = ["cheyang@163.com"]
-  spec.summary       = %q{Ruby API client for accessing Aliyun ECS}
-  spec.description   = %q{Ruby API client for using Aliyun ECS}
-  spec.homepage      = "https://github.com/cheyang/aliyun_ruby_api"
+  spec.authors       = ["cheyang", "cuizheng"]
+  spec.email         = ["cheyang@163.com", "cuizheng.hz@qq.com"]
+  spec.summary       = %q{Ruby API client for accessing Aliyun Api}
+  spec.description   = %q{Ruby API client for using Aliyun Api}
+  spec.homepage      = "https://github.com/charlescui/aliyun_ruby_api"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

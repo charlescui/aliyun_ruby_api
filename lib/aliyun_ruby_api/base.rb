@@ -1,23 +1,14 @@
 module Aliyun
- 
     ALIYUN_API_ENDPOINT='https://ecs.aliyuncs.com/'
     
     SEPARATOR = "&"
     
     HTTP_METHOD = "GET"
     
-    $ENDPOINT_URL = nil
-    
-    
-    $ACCESS_KEY_ID = nil
-    
-    
-    $ACCESS_KEY_SECRET = nil
-    
-    
-    DEFAULT_PARAMETERS = {:Format=>"JSON",
-        :Version=>"2013-01-10", 
+    DEFAULT_PARAMETERS = {
+        :Format=>"JSON",
+        :Version=>"2014-11-11", 
         :SignatureMethod=>"HMAC-SHA1", 
-        :SignatureVersion=>"1.0"}
-  
+        :SignatureVersion=>"1.0"
+    }
 end

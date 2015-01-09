@@ -1,7 +1,7 @@
-# Aliyun ECS API Client for Ruby
+# Aliyun ECS and CDN API Client for Ruby
 
 
-The Aliyun ECS API Client for Ruby 是调用 [阿里云 ECS服务](http://help.aliyun.com/view/11108189_13730407.html) 的 [Ruby](http://www.ruby-lang.org programming language)客户端类库.
+The Aliyun ECS and CDN API Client for Ruby 是调用 [阿里云 ECS服务](http://aliyunecs.oss.aliyuncs.com/ECS-API-Reference%202014-05-26.pdf?spm=5176.7150518.1996836753.5.9U0YcN&file=ECS-API-Reference%202014-05-26.pdf) 和 [阿里云 CDN服务](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf?spm=5176.7150518.1996836753.5.OT7PX3&file=oss%20api%2020140828.pdf) 的 [Ruby]客户端类库.
 
 
 ## 安装
@@ -29,6 +29,8 @@ require 'aliyun_ruby_api'
 
 然后利用自己阿里云账号下的access_key初始化service对象。如果没有access_key，可以通过[阿里云用户中心](https://i.aliyun.com/access_key/)申请access_key。
 
+### ECS的API使用方法
+
 ```
 options = {:access_key_id => "xxxxxx", 
            :access_key_secret => "yyyyyy", 
@@ -40,7 +42,10 @@ service = Aliyun::Service.new options
 这样, 你就可以根据 [阿里云弹性计算服务API参考手册](http://help.aliyun.com/view/11108189_13730407.html)初始化业务参数（除Action参数之外）为一个hash对象，并且将其作为参数传给Action方法（Action参数）。
 
 ```
-parameters = {:[parameter_name] => [parameter_value]}
+parameters = {
+    :Version => "2014-05-26",
+    :[parameter_name] => [parameter_value]
+}
 
 service.[Action] parameters
 ```
@@ -48,7 +53,9 @@ service.[Action] parameters
 (1) 例如查询可用地域列表，其Action参数为DescribeRegions，而没有其他参数，代码如下
 
 ```
-parameters = {}
+parameters = {
+    :Version => "2014-05-26"
+}
 
 service.DescribeRegions parameters
 ```
@@ -70,7 +77,17 @@ $DEBUG = true
 
 ```
 
+### CDN的API使用方法
+
+参考example目录的cdn.rb
+
+### 关于Version参数
+
+哎呦，这个参数很讨厌，经常变，要去ECS和CDN的API手册中查找，阿里云会在新版本的手册中给出Version的参数。如果ECS错误使用了CDN的Version，调用API是会失败的，反之亦然。
+
+- [阿里云 ECS服务](http://aliyunecs.oss.aliyuncs.com/ECS-API-Reference%202014-05-26.pdf?spm=5176.7150518.1996836753.5.9U0YcN&file=ECS-API-Reference%202014-05-26.pdf)
+- [阿里云 CDN服务](http://imgs-storage.cdn.aliyuncs.com/help/oss/oss%20api%2020140828.pdf?spm=5176.7150518.1996836753.5.OT7PX3&file=oss%20api%2020140828.pdf)
 
 ## 参考例子
 
-可以参考example/test.rb来实现。
+可以参考example下面的文件来实现。
