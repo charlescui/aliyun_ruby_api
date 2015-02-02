@@ -1,10 +1,13 @@
 require 'rubygems'
 require 'aliyun_ruby_api'
 
+$access_key_id = "lbxirhq7cO1Gc2dG"
+$access_key_secret = "terZhCBs8Wv8Gswx1pHevS7zwEN9N2"
+
 class EssApi
     def initialize
-        options = {:access_key_id => "wwwwwwwwwwww",
-                   :access_key_secret => "mmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+        options = {:access_key_id => $access_key_id,
+                   :access_key_secret => $access_key_secret,
                    :endpoint_url => "https://ess.aliyuncs.com/"}
 
         @ess_service = Aliyun::Service.new options
@@ -15,7 +18,7 @@ class EssApi
         parameters = {
             :Version => "2014-08-28",
             :RegionId => 'cn-hangzhou',
-            :ScalingGroupId => "xxxxxxxxxxxxxxxxxxxxxxxx",
+            :ScalingGroupId => "bY8sLhdgqZB3cIu7Ufdj4dTZ",
             :PageNumber => page,
             :PageSize => per
         }
@@ -41,8 +44,8 @@ end
 
 class EcsApi
     def initialize
-        options = {:access_key_id => "wwwwwwwwwwww",
-                   :access_key_secret => "mmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+        options = {:access_key_id => $access_key_id,
+                   :access_key_secret => $access_key_secret,
                    :endpoint_url => "https://ecs.aliyuncs.com/"}
 
         @ecs_service = Aliyun::Service.new options
@@ -62,7 +65,15 @@ class EcsApi
     def regions
         @ecs_service.DescribeRegions @parameters
     end
+
+    # 查询实例状态
+    def query(id)
+        parameters = @parameters.dup
+        parameters[:InstanceId] = id
+        @ecs_service.DescribeInstanceAttribute parameters
+    end
 end
+
 
 ess = EssApi.new
 ecs = EcsApi.new
@@ -71,12 +82,27 @@ ecs = EcsApi.new
 # {"CreationTime"=>"2015-02-02T06:07Z",
 #  "CreationType"=>"AutoCreated",
 #  "HealthStatus"=>"Healthy",
-#  "InstanceId"=>"i-23sx28keg",
+#  "InstanceId"=>"i-23bx98ksg",
 #  "LifecycleState"=>"InService",
 #  "ScalingConfigurationId"=>"cStN2jdJR3BGcweiuTeHXAiq",
 #  "ScalingGroupId"=>"bY8sLhdgqZB3cIu7Ufdj4dTZ"}
 ess.fetch_all_instances{|e|
     if id = e["InstanceId"]
         ecs.reboot(id)
+        puts "ECS #{id} is rebooted."
+        condition = true
+        while condition
+            if h = ecs.query(id)
+                if h["Status"].downcase == "running"
+                    puts "ECS #{id} is running."
+                    condition = false
+                else
+                    sleep 5
+                end
+            else
+                puts "Query #{id} is null!"
+                sleep 5
+            end
+        end
     end
 }
