@@ -88,6 +88,45 @@ $DEBUG = true
 
 参考example目录的cdn.rb
 
+## 基于阿里云的弹性伸缩组服务重启
+
+将阿里云开放平台的Key和Secret，通过环境变量传进去:
+
+`ALIYUNACCESSKEYID=lexivhd7dO1Gc2dF ALIYUNACCESSKEYSECRET=terzhCes8Fv5Hswx1pLev4uzwEF9s2 bundle exec irb`
+
+    # 重启弹性伸缩组的所有服务器
+    require "aliyun_ruby_api"
+    @deploy = Aliyun::Deploy::Worker.new(Aliyun::Deploy::EcsApi.new, Aliyun::Deploy::EssApi.new("bY8sLhdgqZB3cIu7Ufdj4dTZ"))
+    @deploy.make
+
+以上代码完成了如下任务:
+- 找到ESS伸缩组及伸缩组中所有ECS服务
+- 重启所有ECS服务
+- 其中，手动接入ESS伸缩组的服务，在重启完毕后要再重新加入ESS
+- 结束
+
+## 基于阿里云CDN的内容更新处理
+
+    options = {
+        :access_key_id => $g_config[:aliyun][:access_key_id],
+        :access_key_secret => $g_config[:aliyun][:access_key_secret],
+        :domains => "http://cdn.example.com/"
+    }
+
+    $cdn = Aliyun::Rals::Cdn.new options
+
+    # 记录缓存URL
+    # 写在ApplicationController中的before_filter里面
+    # app/controllers/application_controller.rb 
+    after_filter ->{$cdn.record}
+
+    # 清理缓存URL
+    # 写在页面被运营人员变更的回调中
+    # 清理具体的URI，包括该URI请求中包含各种各样的参数
+    $cdn.clear_uri(path)
+    # 清理某个Paht的父级目录
+    $cdn.clear_dir(path)
+
 ### 关于Version参数
 
 哎呦，这个参数很讨厌，经常变，要去ECS和CDN的API手册中查找，阿里云会在新版本的手册中给出Version的参数。如果ECS错误使用了CDN的Version，调用API是会失败的，反之亦然。

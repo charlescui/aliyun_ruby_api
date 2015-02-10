@@ -1,3 +1,23 @@
+# options = {
+#     :access_key_id => $g_config[:aliyun][:access_key_id],
+#     :access_key_secret => $g_config[:aliyun][:access_key_secret],
+#     :domains => "http://cdn.example.com/"
+# }
+
+# $cdn = Aliyun::Rals::Cdn.new options
+
+# # 记录缓存URL
+# # 写在ApplicationController中的before_filter里面
+# # app/controllers/application_controller.rb 
+# after_filter ->{$cdn.record}
+
+# # 清理缓存URL
+# # 写在页面被运营人员变更的回调中
+# # 清理具体的URI，包括该URI请求中包含各种各样的参数
+# $cdn.clear_uri(path)
+# # 清理某个Paht的父级目录
+# $cdn.clear_dir(path)
+
 module Aliyun
     module Rails
         class Cdn
@@ -13,7 +33,8 @@ module Aliyun
             
             ALIYUNCDNCACHEKEY = "ALIYUN::Rails::CDN"
 
-            # 清理该资源在阿里云CDN的具体URL，带参数
+            # 清理以path参数，作为URI的path值的URL
+            # 该资源在阿里云CDN的具体URL，包括带参数的URL
             # 这些URL在请求CMS服务器的时候，被记录到memcache里面
             # path是如下格式：/cms/ce-shi
             def clear_uri(path)
