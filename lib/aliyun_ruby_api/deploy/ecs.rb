@@ -1,3 +1,5 @@
+require "rest-client"
+
 module Aliyun
     module Deploy
         class Ecs
@@ -40,7 +42,7 @@ module Aliyun
                 @prefix = "ECS #{@h["InstanceId"]} - #{@h["HostName"]}"
                 if ip = public_ip_address
                     uri = URI.parse("http://#{ip}:#{port}")
-                    puts "#{@prefix} #{uri}"
+                    # puts "#{@prefix} #{uri}"
                     s = RestClient.get uri.to_s
                     # puts "#{@prefix} checking web server"
                     if (s.code.to_s =~ /2\d\d/) || (s.code.to_s =~ /3\d\d/)
