@@ -92,7 +92,7 @@ $DEBUG = true
 
 将阿里云开放平台的Key和Secret，通过环境变量传进去:
 
-`ALIYUNACCESSKEYID=lexivhd7dO1Gc2dF ALIYUNACCESSKEYSECRET=terzhCes8Fv5Hswx1pLev4uzwEF9s2 bundle exec irb`
+`ALIYUNACCESSKEYID=kkkkkkkkkkkkkk ALIYUNACCESSKEYSECRET=ssssssssssssssssssssssssssssssssssss irb`
 
     # 重启弹性伸缩组的所有服务器
     require "aliyun_ruby_api"
