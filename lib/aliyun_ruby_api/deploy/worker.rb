@@ -10,8 +10,7 @@
 
 # 
 ALIYUNACCESSKEYID=lexivhd7dO1Gc2dF ALIYUNACCESSKEYSECRET=terzhCes8Fv5Hswx1pLev4uzwEF9s2 irb
-# 重启CMS弹性伸缩组的所有服务器
-# 重启CMS非弹性伸缩组的固定服务器
+# 重启弹性伸缩组的所有服务器
 require "aliyun_ruby_api"
 @deploy = Aliyun::Deploy::Worker.new(Aliyun::Deploy::EcsApi.new, Aliyun::Deploy::EssApi.new("bY8sLhdgqZB3cIu7Ufdj4dTZ"))
 @deploy.make
@@ -115,7 +114,7 @@ module Aliyun
                         @ecs_reboot_proc.call(id)
                     end
                 rescue Exception => e
-                    puts "Left ECS(#{@instance.inspect.size}) :\n #{@instance.inspect}"
+                    puts "Left ECS(#{@instances.inspect.size}) :\n #{@instances.inspect}"
                     raise e
                 end
                 puts "@@@@@@@@@@#{Time.now.to_s}@@@@@@"

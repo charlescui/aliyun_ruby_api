@@ -35,7 +35,7 @@ module Aliyun
 
             # 清理以path参数，作为URI的path值的URL
             # 该资源在阿里云CDN的具体URL，包括带参数的URL
-            # 这些URL在请求CMS服务器的时候，被记录到memcache里面
+            # 这些URL在请求服务器的时候，被记录到memcache里面
             # path是如下格式：/cms/ce-shi
             def clear_uri(path)
                 return if !Rails.cache
