@@ -10,6 +10,11 @@ require "pp"
 module Aliyun
   
   class AliyunAPIException < RuntimeError
+    attr_accessor :response
+    
+    def initialize(msg, response=nil)
+      self.response = response if response
+    end
   end
   
   class Service
@@ -66,7 +71,7 @@ module Aliyun
         when Net::HTTPSuccess
         return JSON.parse(response.body)
       else
-        raise AliyunAPIException.new "response error code: #{response.code} and details #{response.body}"
+        raise AliyunAPIException.new "response error code: #{response.code} and details #{response.body}", response
       end
     end
     
