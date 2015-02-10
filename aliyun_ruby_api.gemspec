@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake"
   spec.add_dependency "ruby-hmac"
+  spec.add_dependency 'rest-client'
 end

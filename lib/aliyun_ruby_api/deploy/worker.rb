@@ -111,7 +111,9 @@ module Aliyun
                 puts "@@@@@@@@@@Deploy Start@@@@@@@@@@"
                 puts "@@@@@@@@@@#{Time.now.to_s}@@@@@@"
                 begin
-                    @instances.pop { |e| @ecs_reboot_proc.call(e) }
+                    while id = @instances.pop
+                        @ecs_reboot_proc.call(id)
+                    end
                 rescue Exception => e
                     puts "Left ECS(#{@instance.inspect.size}) :\n #{@instance.inspect}"
                     raise e
