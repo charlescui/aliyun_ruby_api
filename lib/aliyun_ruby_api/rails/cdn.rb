@@ -15,7 +15,7 @@
 # # 写在页面被运营人员变更的回调中
 # # 清理具体的URI，包括该URI请求中包含各种各样的参数
 # $cdn.clear_uri(path)
-# # 清理某个Paht的父级目录
+# # 清理某个Path的父级目录
 # $cdn.clear_dir(path)
 
 module Aliyun
