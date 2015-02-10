@@ -116,7 +116,7 @@ $DEBUG = true
     $cdn = Aliyun::Rals::Cdn.new options
 
     # 记录缓存URL
-    # 写在ApplicationController中的before_filter里面
+    # 写在ApplicationController中的after_filter里面
     # app/controllers/application_controller.rb 
     after_filter ->{$cdn.record}
 
