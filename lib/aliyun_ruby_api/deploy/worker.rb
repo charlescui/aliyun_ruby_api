@@ -1,18 +1,8 @@
 =begin
-# 每台服务器的实例
-# {"CreationTime"=>"2015-02-02T06:07Z",
-#  "CreationType"=>"AutoCreated",
-#  "HealthStatus"=>"Healthy",
-#  "InstanceId"=>"i-23bx98ksg",
-#  "LifecycleState"=>"InService",
-#  "ScalingConfigurationId"=>"cStN2jdJR3BGcweiuTeHXAiq",
-#  "ScalingGroupId"=>"bY8sLhdgqZB3cIu7Ufdj4dTZ"}
-
-# 
-ALIYUNACCESSKEYID=lexivhd7dO1Gc2dF ALIYUNACCESSKEYSECRET=terzhCes8Fv5Hswx1pLev4uzwEF9s2 irb
+ALIYUNACCESSKEYID=kkkkkkkkkkkkkk ALIYUNACCESSKEYSECRET=ssssssssssssssssssssssssssssssssssss irb
 # 重启弹性伸缩组的所有服务器
 require "aliyun_ruby_api"
-@deploy = Aliyun::Deploy::Worker.new(Aliyun::Deploy::EcsApi.new, Aliyun::Deploy::EssApi.new("bY8sLhdgqZB3cIu7Ufdj4dTZ"))
+@deploy = Aliyun::Deploy::Worker.new(Aliyun::Deploy::EcsApi.new, Aliyun::Deploy::EssApi.new("伸缩组ID"))
 @deploy.make
 =end
 
