@@ -1,5 +1,3 @@
-require "rest-client"
-
 module Aliyun
     module Deploy
         class Ecs
