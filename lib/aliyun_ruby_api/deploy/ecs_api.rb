@@ -1,10 +1,10 @@
 module Aliyun
     module Deploy
         class EcsApi
-            def initialize
+            def initialize(opts={})
                 options = {:access_key_id => Aliyun::Deploy::Worker::ALIYUNACCESSKEYID,
                            :access_key_secret => Aliyun::Deploy::Worker::ALIYUNACCESSKEYSECRET,
-                           :endpoint_url => "https://ecs.aliyuncs.com/"}
+                           :endpoint_url => "https://ecs.aliyuncs.com/"}.update(opts)
 
                 @ecs_service = Aliyun::Service.new options
                 @parameters = {

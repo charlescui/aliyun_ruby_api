@@ -3,10 +3,10 @@ module Aliyun
         # http://imgs-storage.cdn.aliyuncs.com/help/ess/弹性伸缩服务API手册.pdf?spm=5176.775974890.2.4.1LJfkS&file=弹性伸缩服务API手册.pdf
         class EssApi
             # 入参是伸缩组的ID
-            def initialize(scaling_group_id)
+            def initialize(scaling_group_id, opts={})
                 options = {:access_key_id => Aliyun::Deploy::Worker::ALIYUNACCESSKEYID,
                            :access_key_secret => Aliyun::Deploy::Worker::ALIYUNACCESSKEYSECRET,
-                           :endpoint_url => "https://ess.aliyuncs.com/"}
+                           :endpoint_url => "https://ess.aliyuncs.com/"}.update(opts)
 
                 @ess_service = Aliyun::Service.new options
                 @scaling_group_id = scaling_group_id
